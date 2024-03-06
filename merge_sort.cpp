@@ -1,19 +1,93 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-void Merge(int arr[], int start, int mid, int end);
-void MergeSort(int arr[], int start, int end) {
-	if (start < end) {
-		int mid = (start + end) / 2;
-		MergeSort(arr, start, mid);
-		MergeSort(arr, mid + 1, end);
-		Merge(arr, start, mid, end);
-	}
-}
-void Merge(int arr[], int start, int mid, int end) {
 
+void merge(int arr[], int left, int middle, int right);
+
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        // Same as (left+right)/2, but avoids overflow for large left and right
+        int middle = left + (right - left) / 2;
+
+        // Sort first and second halves
+        mergeSort(arr, left, middle);
+        mergeSort(arr, middle + 1, right);
+
+        // Merge the sorted halves
+        merge(arr, left, middle, right);
+    }
+}
+
+void merge(int arr[], int left, int middle, int right) {
+    int n1 = middle - left + 1; // Initial size of first subarray
+    int n2 = right - middle; // Initial size of second subarray
+
+    // Create temporary arrays using dynamic memory allocation
+    int* L = new int[n1];
+    int* R = new int[n2];
+
+    // Copy data to temporary arrays L[] and R[]
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[middle + 1 + j];
+
+    // Merge the temporary arrays back into arr[left..right]
+    int i = 0; // Initial index of first subarray
+    int j = 0; // Initial index of second subarray
+    int k = left; // Initial index of merged subarray
+
+    // Case if there elements inside both of two arrays
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        }
+        else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy the remaining elements of L[], if there are any
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // Copy the remaining elements of R[], if there are any
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+
+    // Free the dynamically allocated memory
+    delete[] L;
+    delete[] R;
+}
+
+void displayUnSortedArr(int arr[],int arrSize) {
+
+    cout << "Original array: ";
+
+    for (int i = 0; i < arrSize; i++) {
+        cout << arr[i] << " ";
+    }
+ }
+void displaySortedArr(int arr[], int arrSize) {
+
+    cout << "\nSorted array: ";
+    for (int i = 0; i < arrSize; i++) {
+        cout << arr[i] << " ";
+    }
 }
 int main() {
-
-
-	return 0;
+    int arr[] = { 12, 11, 13, 5, 6, 7 };
+    int arrSize = sizeof(arr) / sizeof(arr[0]);
+    displayUnSortedArr(arr,arrSize);
+    mergeSort(arr, 0, arrSize - 1);
+    displaySortedArr(arr, arrSize);
+    return 0;
 }

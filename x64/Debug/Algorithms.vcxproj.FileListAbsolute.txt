@@ -1,1 +1,2 @@
 D:\Algorithms\Algorithms\x64\Debug\Algorithms.exe
+D:\Algorithm\x64\Debug\Algorithms.exe

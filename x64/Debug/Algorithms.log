@@ -1,4 +1,2 @@
-﻿  insertion_sort.cpp
-  merge_sort.cpp
-  Generating Code...
-  Algorithms.vcxproj -> D:\Algorithms\Algorithms\x64\Debug\Algorithms.exe
+﻿merge_sort.obj : error LNK2005: main already defined in insertion_sort.obj
+D:\Algorithm\x64\Debug\Algorithms.exe : fatal error LNK1169: one or more multiply defined symbols found
