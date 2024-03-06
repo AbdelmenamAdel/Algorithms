@@ -20,7 +20,7 @@ void displaySortedArray(int A[], int size) {
 	}
 	cout << endl;
 }
-/*
+
 int main()
 {
 	int A[10] = { 5,4,3,2,1,10,9,8,7,6 };
@@ -28,4 +28,3 @@ int main()
 	displaySortedArray(A, sizeof(A) / 4);
 
 }
-*/
